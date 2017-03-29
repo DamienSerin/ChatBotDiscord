@@ -1,7 +1,7 @@
 "use strict";
 
 /*
-  A ping pong bot, whenever you send "ping", it replies "pong".
+  A FAIRE: ne pas oublier de tout séparer dans des fichiers différents (répartis par api)
 */
 // import the discord.js module
 const Discord = require('discord.js');
@@ -16,11 +16,11 @@ module.exports = function(params) {
     var self = this;
     self.token = params;
     this.connect = function(){
-        console.log(self.token);
         self.bot = new Discord.Client();
         self.bot.login(self.token);
         self.bot.on('ready', self.onReady);
         self.bot.on('message', self.onMessage);
+        self.bot.on('presenceUpdate', self.onPresenceUpdate);
     }
     
     self.onReady = function() {
@@ -33,6 +33,29 @@ module.exports = function(params) {
         }
         if(message.content === 'ping'){
             message.channel.sendMessage('pong');
+        }
+        
+        if(message.channel.type == 'dm'){
+            
+        }else if(message.isMemberMentioned(self.bot.user)){ // ca plante a voir
+                message.channel.sendMessage('Oui ?');
+        }
+
+        /*if(message.mentions.users.find('username', 'Damien_Bot') != null){
+            console.log("olo " + message);
+        }*/
+        //console.log(message.mentions.users.get('username'));
+    }
+    
+    self.onPresenceUpdate = function(oldMember, newMember){
+       // console.log(oldMember.presence, '=>', newMember.presence);
+        /* check la reconnection de l'user bramas et lui dit bonjour */
+        //console.log(oldMember.user.username);
+        if(newMember.user.username == "bramas"){
+            if(oldMember.presence.status == 'offline' && newMember.presence.status == "online"){
+                newMember.sendMessage("Bonjour maitre, je suis le bot de Sandra et de Damien, que puis-je faire pour vous aujourd'hui?")
+               // console.log("reconnect");
+            }
         }
     }
 
