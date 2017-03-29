@@ -36,9 +36,7 @@ module.exports = function(params) {
 
         let mentions = message.mentions.users.array();
        
-        if(message.channel.type == 'dm'){
-            message.channel.sendMessage('test');    
-        }else if(message.mentions.users.has(self.bot.user.id)){
+        if(message.channel.type == 'dm' || message.mentions.users.has(self.bot.user.id)){
             message.channel.sendMessage('Oui ?');
         }
         /*else if(message.isMemberMentioned(self.bot.user)){
