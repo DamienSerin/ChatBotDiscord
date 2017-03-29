@@ -1,13 +1,9 @@
 module.exports = {
     handleMessage: function(message){
-
+ 
     },
     
     toto: function(){
-        
-    },
-    
-    tamere: function(){
         
     }
     //faire un switch sur les eventuelles commandes contenues dans le message
