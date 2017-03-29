@@ -5,7 +5,7 @@
 */
 // import the discord.js module
 const Discord = require('discord.js');
-
+var messageHandler = require('./message.js');
 // create an instance of a Discord Client, and call it bot
 //const bot = new Discord.Client();
 
@@ -31,16 +31,18 @@ module.exports = function(params) {
         if(message.author.bot){
             return;
         }
-        if(message.content === 'ping'){
-            message.channel.sendMessage('pong');
-        }
         
-        if(message.channel.type == 'dm'){
-            
-        }else if(message.isMemberMentioned(self.bot.user)){ // ca plante a voir
-                message.channel.sendMessage('Oui ?');
-        }
+        messageHandler.handleMessage(message);
 
+        let mentions = message.mentions.users.array();
+       
+        if(message.channel.type == 'dm'){
+            message.channel.sendMessage('test');    
+        }else if(message.mentions.users.has(self.bot.user.id)){
+            message.channel.sendMessage('Oui ?');
+        }
+        /*else if(message.isMemberMentioned(self.bot.user)){
+                message.channel.sendMessage('Oui ?');*/
         /*if(message.mentions.users.find('username', 'Damien_Bot') != null){
             console.log("olo " + message);
         }*/
