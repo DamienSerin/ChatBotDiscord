@@ -24,12 +24,11 @@ module.exports = function(params) {
             return;
         }
         
-        messageHandler.handleMessage(message);
+        
 
         let mentions = message.mentions.users.array();
-       
         if(message.channel.type == 'dm' || message.mentions.users.has(self.bot.user.id)){
-            message.channel.sendMessage('Oui ?');
+            messageHandler.handleMessage(message, self.bot);
         }
     }
     
