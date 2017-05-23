@@ -1,15 +1,16 @@
 {
   "name": "chatbotdiscord",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "discord_bot.js",
   "scripts": {
     "test": "",
-    "start": "node server.js"
+    "start": "node discord_bot.js"
   },
   "author": "Patate",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.0.0"
+    "discord.js": "^11.0.0",
+    "moment": "^2.18.1"
   },
   "devDependencies": {},
   "repository": {

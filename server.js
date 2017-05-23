@@ -1,5 +1,5 @@
-var Bot = require('./bot.js')
+var DiscordBot = require('./discord_bot.js')
 
-var bot = new Bot(process.env.DISCORD_TOKEN);
-    
-bot.connect();
+var bot = new DiscordBot(process.env.DISCORD_TOKEN);
+
+bot.init();
