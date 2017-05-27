@@ -12,6 +12,7 @@
     "bufferutil": "^3.0.0",
     "discord.js": "^11.0.0",
     "erlpack": "github:hammerandchisel/erlpack",
+    "image-downloader": "^3.2.1",
     "moment": "^2.18.1",
     "sharp": "^0.17.3",
     "uws": "^0.14.5"

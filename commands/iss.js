@@ -1,6 +1,9 @@
 const axios = require("axios");
 const fs = require("fs");
 const sharp = require("sharp");
+const download = require('image-downloader')
+const Discord = require('discord.js');
+
 exports.run = (client, message, params) => {
         let lat = 0;
         let long = 0;
@@ -9,27 +12,23 @@ exports.run = (client, message, params) => {
             .then(function (response) {
                 lat = response.data.latitude;
                 long = response.data.longitude;
-                console.log(lat +" "+long);
-                console.log("http://staticmap.openstreetmap.de/staticmap.php?center="+lat+","+long+"&zoom=4&size=400x400&maptype=mapnik&markers="+lat+","+long+",ltblu-pushpin");
-                axios.get("http://staticmap.openstreetmap.de/staticmap.php?center="+lat+","+long+"&zoom=4&size=400x400&maptype=mapnik&markers="+lat+","+long+",ltblu-pushpin", {responseType:'stream'})
-                    .then(function (response) {
-                        //response.data.pipe(fs.createWriteStream('./issmap.png'));
-                        console.log(__dirname);
-
-                            sharp('./ISS.png')
-                              .overlayWith('./ISS.png', { gravity: sharp.gravity.centre } )
-                              .png({'quality': 90})
-                              .toFile('whereisiss.png', function(err) {
-                                  console.log(err);
-                                  console.log(__dirname);
-                                  message.reply('./../whereisiss.png');
-                                // outputBuffer contains upside down, 300px wide, alpha channel flattened
-                                // onto orange background, composited with overlay.png with SE gravity,
-                                // sharpened, with metadata, 90% quality WebP image data. Phew!
-                              });
-                    })
-                    .catch(function (error) {
-                        console.log(error);
+                const options = {
+                    url : "http://staticmap.openstreetmap.de/staticmap.php?center="+lat+","+long+"&zoom=4&size=1000x1000&maptype=mapnik",
+                    dest: "./issmap.png"
+                }
+                download.image(options)
+                    .then(({ filename, image }) => {
+                        sharp('./issmap.png')
+                          .overlayWith('./ISS.png', { gravity: sharp.gravity.centre } )
+                          .png({'quality': 90})
+                          .toFile('./whereisiss.png', function(err) {
+                              const embed = new Discord.RichEmbed()
+                                  .setTitle("Position de l'ISS")
+                                  .attachFile('./whereisiss.png');
+                              message.reply({embed: embed});
+                          });
+                    }).catch((err) => {
+                        throw err
                     });
             })
             .catch(function (error) {
@@ -46,6 +45,6 @@ exports.conf = {
 
 exports.help = {
     name: 'iss',
-    description: 'Donne la météo du lendemain pour la ville demandée',
-    usage: 'image <mot> [<time>||<viral>||<top> - default to time]'
+    description: 'Affiche la position actuelle de l\'iss',
+    usage: 'iss'
 };

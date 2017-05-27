@@ -12,15 +12,19 @@ exports.run = (client, message, params) => {
         message.reply("!help meteo pour la syntaxe de la commande");
         return;
     } else {
-        let requestURL = baseURL + type + "?q=" + params[0] + "&units=metric" + "&APPID=" + apikey +"&cnt=1" + "&lang=fr";
+        let requestURL = baseURL + type + "?q=" + params[0] + "&units=metric" + "&APPID=" + apikey +"&cnt=3" + "&lang=fr";
         axios.get(requestURL)
             .then(function (response) {
+                console.log(response.data)
+                console.log(response.data.list[0].weather);
+                console.log(response.data.list[0].temp);
+
                 const embed = new Discord.RichEmbed()
-                    .setTitle("Météo à " + params[0] + " le " + moment(date).format("DD-MM-YYYY"))
-                    .setImage(iconBaseURL + response.data.list[0].weather[0].icon + ".png")
-                    .addField('Prévision:', response.data.list[0].weather[0].description)
-                    .addField('Temp Min:', response.data.list[0].temp.min)
-                    .addField('Temp Max:', response.data.list[0].temp.max);
+                    .setTitle("Météo à " + params[0] + " le " + moment(date.add(1, 'd')).format("DD-MM-YYYY"))
+                    .setImage(iconBaseURL + response.data.list[1].weather[0].icon + ".png")
+                    .addField('Prévision:', response.data.list[1].weather[0].description)
+                    .addField('Temp Min:', response.data.list[1].temp.min)
+                    .addField('Temp Max:', response.data.list[1].temp.max);
                 message.reply({embed: embed});
             })
             .catch(function (error) {
