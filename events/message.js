@@ -9,8 +9,8 @@ module.exports = message => {
     let command;
     let args;
 
-    let r1 = RegExp("^("+config.botId+"){1}(\\s){1}("+config.prefix+"[a-z]+){1}((\\s){1}[a-z]+)*$", "g");
-    let r2 = RegExp("^("+config.prefix+"[a-z]+){1}(\\s+[a-z]+)*$", "g");
+    let r1 = RegExp("^("+config.botId+"){1}(\\s){1}("+config.prefix+"[a-z]+){1}((\\s){1}[a-zA-Z]+)*$", "g");
+    let r2 = RegExp("^("+config.prefix+"[a-z]+){1}(\\s+[a-zA-Z]+)*$", "g");
 
     if(message.channel.type == 'dm' || message.mentions.users.has(config.bot_id)){
         if(r1.test(message.content)){

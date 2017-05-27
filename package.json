@@ -9,8 +9,12 @@
   "author": "Patate",
   "license": "ISC",
   "dependencies": {
+    "bufferutil": "^3.0.0",
     "discord.js": "^11.0.0",
-    "moment": "^2.18.1"
+    "erlpack": "github:hammerandchisel/erlpack",
+    "moment": "^2.18.1",
+    "sharp": "^0.17.3",
+    "uws": "^0.14.5"
   },
   "devDependencies": {},
   "repository": {

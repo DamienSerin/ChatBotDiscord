@@ -20,7 +20,7 @@ fs.readdir('./commands/', (err, files) => {
     log(`Loading a total of ${files.length} commands.`);
     files.forEach(f => {
         let cmd = require(`./commands/${f}`);
-        log(`Loading Command: ${cmd.help.name}. 👌`);
+        log(`Loading Command: ${cmd.help.name} ✔`);
         client.commands.set(cmd.help.name, cmd);
     });
 });
