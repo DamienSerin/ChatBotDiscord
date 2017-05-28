@@ -44,6 +44,6 @@ exports.conf = {
 
 exports.help = {
     name: 'image',
-    description: 'Donne la météo du lendemain pour la ville demandée',
+    description: 'Recherche une image sur imgur',
     usage: 'image <mot> [<time>||<viral>||<top> - default to time]'
 };

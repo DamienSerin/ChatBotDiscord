@@ -14,9 +14,12 @@
     "erlpack": "github:hammerandchisel/erlpack",
     "image-downloader": "^3.2.1",
     "moment": "^2.18.1",
+    "node-opus": "^0.2.6",
     "node-wit": "^4.2.0",
+    "opusscript": "0.0.3",
     "sharp": "^0.17.3",
-    "uws": "^0.14.5"
+    "uws": "^0.14.5",
+    "ytdl-core": "^0.14.1"
   },
   "devDependencies": {},
   "repository": {

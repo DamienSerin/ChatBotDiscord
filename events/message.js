@@ -12,8 +12,8 @@ module.exports = message => {
     let args;
     let cmd="";
 
-    let r1 = RegExp("^("+config.botId+"){1}(\\s){1}("+config.prefix+"[a-z]+){1}((\\s){1}[a-zA-Z]+)*$", "g");
-    let r2 = RegExp("^("+config.prefix+"[a-z]+){1}(\\s+[a-zA-Z]+)*$", "g");
+    let r1 = RegExp("^("+config.botId+"){1}(\\s){1}("+config.prefix+"[a-z]+){1}((\\s){1}.+)*$", "g");
+    let r2 = RegExp("^("+config.prefix+"[a-z]+){1}(\\s+.+)*$", "g");
 
     if(message.channel.type == 'dm' || message.mentions.users.has(config.bot_id)){
         if(r1.test(message.content)){
@@ -32,7 +32,7 @@ module.exports = message => {
                     cmd = data.entities.intent[0].value;
                     console.log(cmd);
                 } else {
-                    message.reply("Oui ?");
+                    message.reply("Je n'ai pas compris ?");
                     message.reply("Pour utiliser une commande: @Damien_Bot !commande arguments");
                     message.reply("Pour voir la liste des commandes: @Damien_Bot !help");
                     return;
